@@ -14,7 +14,7 @@ const useFilter = (defaultItems = [], defaultItemsView) => {
       filteredItems = items.map((_, idx) => idx);
     } else {
       items.forEach((item, idx) => {
-        if (item.toLowerCase().includes(sanitizedValue)) {
+        if (item.name.toLowerCase().includes(sanitizedValue)) {
           filteredItems.push(idx);
         }
       });

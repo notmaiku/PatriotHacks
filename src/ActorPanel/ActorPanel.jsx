@@ -21,7 +21,6 @@ const ActorPanel = ({
       links,
     );
     setData({ nodes: newNodes, links: newLinks });
-    console.log(newNodes, newLinks);
     setActorsView([...actorsView, idx]);
   };
 
@@ -35,7 +34,7 @@ const ActorPanel = ({
   return (
     <div className="panel">
       <div id="header">
-        <h1>Add Actors</h1>
+        <h1>Best Actor Visualizer (BAV)</h1>
         <div id="expandButton" />
       </div>
       <div id="panelScrim" />

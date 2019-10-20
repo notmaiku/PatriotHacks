@@ -1,17 +1,18 @@
 import React from 'react';
 
 const SearchBar = ({ onChange }) => (
-  <div id="inputWrapper">
+  <div className="inputWrapper">
+    <label htmlFor="searchActor">Add or Remove Actors</label>
     <input
+      id="searchActor"
+      className="searchInputBar"
       placeholder=""
       type="text"
-      id="filter"
       autoCorrect="off"
       autoCapitalize="off"
       spellCheck="false"
       onChange={onChange}
     />
-    <div id="exitSearchButton" />
   </div>
 );
 

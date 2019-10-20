@@ -1,10 +1,10 @@
-
 /* Fonts */
 @import url('https://fonts.googleapis.com/css?family=Merriweather|Montserrat|PT+Sans&display=swap');
 
 /* Global stuff */
 body {
   margin: 0;
+  font-family: 'Merriweather', serif;
 }
 
 /* left panel */
@@ -13,16 +13,23 @@ body {
   flex-direction: column;
   padding: 0 20px;
   background-color: white;
+  border: 1px solid #e8e8e8;
   height: 100%;
   position: absolute;
   width: 20%;
   z-index: 1;
 }
 #header h1 {
-  font-size: 32px;
+  font-size: 24px;
   font-family: 'Merriweather', serif;
-  line-height: 20px;;
-  border-bottom: solid cadetblue 2px;
+  border-bottom: 1px solid #e8e8e8;
+  padding-bottom: 10px;
+  width: 100%;
+}
+
+h3 {
+  font-family: 'Merriweather', serif;
+  border-bottom: 1px solid #e8e8e8;
   padding-bottom: 10px;
   width: 100%;
 }
@@ -36,11 +43,39 @@ input#filter {
   list-style: none;
 }
 
-p{
-  font-size: 24px;
+.actorName {
+  text-indent: 5px;
+  font-size: 12px;
   padding: 5px 0;
   font-family: 'Merriweather', serif;
 }
+
+.actorRow:hover {
+  cursor: pointer;
+  opacity: 0.5;
+}
+
+.actorRow {
+  border: 1px solid black;
+}
+
+.actorAction {
+  padding-right: 5px;
+  float: right;
+}
+
+.inputWrapper {
+  margin-bottom: 15px;
+}
+
+.searchInputBar {
+  width: 100%;
+}
+
 #contentWrapper li p:hover {
   color: cadetblue;
+}
+
+p {
+  font-size: 16px;
 }
