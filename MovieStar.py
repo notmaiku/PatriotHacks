@@ -46,9 +46,9 @@ def getTrainingDataFromMovieDB():
                         revenueForID.append(data['revenue'])
                         budgetForID.append(data['budget'])
 
-        actorsData[actorNames[0] + "_" + actorNames[1]] = {}
-        actorsData[actorNames[0] + "_" + actorNames[1]]['revenue'] = revenueForID
-        actorsData[actorNames[0] + "_" + actorNames[1]]['budget'] = budgetForID
+            actorsData[actorNames[0] + "_" + actorNames[1]] = {}
+            actorsData[actorNames[0] + "_" + actorNames[1]]['revenue'] = revenueForID
+            actorsData[actorNames[0] + "_" + actorNames[1]]['budget'] = budgetForID
 
     return actorsData
 
@@ -65,72 +65,74 @@ def makeMockData(columns):
             else:
                 listMock.append(0)
         #         Budget
-        listMock.append(random.randint(1,99)* 10000)
+        listMock.append(random.randint(1,99)* 100000)
         # Revenue
         listMock.append(random.randint(1,99)* 1000000)
 
         listOfSeries.append(pd.Series(listMock, index=columns))
     return listOfSeries
 
+def RandomForestRegressor():
+    feature = pd.read_csv('PatriotHack.csv')
+    # print(features.head(5))
+    # mock = makeMockData(feature.columns)
+    # features = feature.append(mock, ignore_index=True)
 
-feature = pd.read_csv('PatriotHack.csv')
-# print(features.head(5))
-mock = makeMockData(feature.columns)
-features = feature.append(mock, ignore_index=True)
-print(features)
+    features = feature
 
-revenue = np.array(features['revenue'])
-budget = np.array(features['budget'])
-# Higher is better value
-value = np.array(list(map(lambda x, y: x/y, revenue, budget)))
-# for val in value:
-    # print(val)
-
-
-features = features.drop('revenue', axis = 1)
-features = features.drop('budget', axis = 1)
-
-feature_list = list(features.columns)
-
-features = np.array(features)
+    revenue = np.array(features['revenue'])
+    budget = np.array(features['budget'])
+    # Higher is better value
+    value = np.array(list(map(lambda x, y: x/y, revenue, budget)))
+    # for val in value:
+        # print(val)
 
 
-# Split the data into training and testing sets
-# train_features, test_features, train_labels, test_labels = train_test_split(features, value, test_size = 0.15, random_state = 42)
-train_features, test_features, train_labels, test_labels = train_test_split(features, revenue, test_size = 0.15, random_state = 42)
+    features = features.drop('revenue', axis = 1)
+    features = features.drop('budget', axis = 1)
+
+    feature_list = list(features.columns)
+
+    features = np.array(features)
 
 
-print('Training Features Shape:', train_features.shape)
-print('Training Labels Shape:', train_labels.shape)
-print('Testing Features Shape:', test_features.shape)
-print('Testing Labels Shape:', test_labels.shape)
+    # Split the data into training and testing sets
+    # train_features, test_features, train_labels, test_labels = train_test_split(features, value, test_size = 0.15, random_state = 42)
+    train_features, test_features, train_labels, test_labels = train_test_split(features, revenue, test_size = 0.15, random_state = 42)
 
-# Import the model we are using
-from sklearn.ensemble import RandomForestRegressor
-# Instantiate model with 1000 decision trees
-rf = RandomForestRegressor(n_estimators = 3000, random_state = 42)
-# Train the model on training data
-rf.fit(train_features, train_labels);
-# Use the forest's predict method on the test data
-predictions = rf.predict(test_features)
-# Calculate the absolute errors
-errors = abs(predictions - test_labels)
-# Print out the mean absolute error (mae)
-print('Mean Absolute Error:', round(np.mean(errors), 2), 'degrees.')
 
-# Calculate mean absolute percentage error (MAPE)
-mape = 100 * (errors / test_labels)
-# Calculate and display accuracy
-accuracy = 100 - np.mean(mape)
-print('Accuracy:', round(accuracy, 2), '%.')
+    print('Training Features Shape:', train_features.shape)
+    print('Training Labels Shape:', train_labels.shape)
+    print('Testing Features Shape:', test_features.shape)
+    print('Testing Labels Shape:', test_labels.shape)
 
-# Get numerical feature importances
-importances = list(rf.feature_importances_)
-# List of tuples with variable and importance
-feature_importances = [(feature, round(importance, 2)) for feature, importance in zip(feature_list, importances)]
-# Sort the feature importances by most important first
-feature_importances = sorted(feature_importances, key = lambda x: x[1], reverse = True)
-# Print out the feature and importances
-[print('Variable: {:20} Importance: {}'.format(*pair)) for pair in feature_importances];
+    # Import the model we are using
+    from sklearn.ensemble import RandomForestRegressor
+    # Instantiate model with 1000 decision trees
+    rf = RandomForestRegressor(n_estimators = 3000, random_state = 42)
+    # Train the model on training data
+    rf.fit(train_features, train_labels);
+    # Use the forest's predict method on the test data
+    predictions = rf.predict(test_features)
+    print(predictions.size )
+    # Calculate the absolute errors
+    errors = abs(predictions - test_labels)
+    # Print out the mean absolute error (mae)
+    print('Mean Absolute Error:', round(np.mean(errors), 2), 'degrees.')
+
+    # Calculate mean absolute percentage error (MAPE)
+    mape = 100 * (errors / test_labels)
+    # Calculate and display accuracy
+    accuracy = 100 - np.mean(mape)
+    print('Accuracy:', round(accuracy, 2), '%.')
+
+    # Get numerical feature importances
+    importances = list(rf.feature_importances_)
+    # List of tuples with variable and importance
+    feature_importances = [(feature, round(importance, 2)) for feature, importance in zip(feature_list, importances)]
+    # Sort the feature importances by most important first
+    feature_importances = sorted(feature_importances, key = lambda x: x[1], reverse = True)
+    # Print out the feature and importances
+    [print('Variable: {:20} Importance: {}'.format(*pair)) for pair in feature_importances];
 
 
