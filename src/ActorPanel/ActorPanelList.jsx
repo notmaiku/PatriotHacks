@@ -1,6 +1,5 @@
 import React from 'react';
 
-const actors = ['Adam Sandler', 'Brad Pitt', 'Tom Cruise', 'Tom Hanks'];
-const ActorPanelList = () => actors.map((actor) => <div key={Math.random()}>{actor}</div>);
+const ActorPanelList = ({ actors, actorsView }) => actorsView.map((idx) => <div key={Math.random()}>{actors[idx]}</div>);
 
 export default ActorPanelList;
