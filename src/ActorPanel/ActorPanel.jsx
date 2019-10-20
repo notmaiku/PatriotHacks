@@ -39,6 +39,7 @@ const ActorPanel = ({
       </div>
       <div id="panelScrim" />
       <div id="contentWrapper">
+        <h3>Top Actors</h3>
         <SearchBar onChange={filterActors} />
         <ActorPanelList
           actors={defaultActors}

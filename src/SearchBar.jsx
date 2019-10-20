@@ -2,7 +2,7 @@ import React from 'react';
 
 const SearchBar = ({ onChange }) => (
   <div className="inputWrapper">
-    <label htmlFor="searchActor">Add or Remove Actors</label>
+    <label htmlFor="searchActor">Search</label>
     <input
       id="searchActor"
       className="searchInputBar"
