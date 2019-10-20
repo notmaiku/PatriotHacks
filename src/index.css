@@ -1,11 +1,46 @@
+
+/* Fonts */
+@import url('https://fonts.googleapis.com/css?family=Merriweather|Montserrat|PT+Sans&display=swap');
+
+/* Global stuff */
 body {
   margin: 0;
 }
 
+/* left panel */
 .panel {
+  display: flex;
+  flex-direction: column;
+  padding: 0 20px;
   background-color: white;
   height: 100%;
   position: absolute;
   width: 20%;
   z-index: 1;
+}
+#header h1 {
+  font-size: 32px;
+  font-family: 'Merriweather', serif;
+  line-height: 20px;;
+  border-bottom: solid cadetblue 2px;
+  padding-bottom: 10px;
+  width: 100%;
+}
+
+input#filter {
+  width: 75%;
+  box-shadow: 5px 5px cadetblue;
+}
+
+#contentWrapper li {
+  list-style: none;
+}
+
+p{
+  font-size: 24px;
+  padding: 5px 0;
+  font-family: 'Merriweather', serif;
+}
+#contentWrapper li p:hover {
+  color: cadetblue;
 }
