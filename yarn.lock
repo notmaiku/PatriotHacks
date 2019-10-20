@@ -2,7 +2,7 @@
 # yarn lockfile v1
 
 
-"3d-force-graph@^1.55.13":
+"3d-force-graph@^1.55.12", "3d-force-graph@^1.55.13":
   version "1.55.13"
   resolved "https://registry.yarnpkg.com/3d-force-graph/-/3d-force-graph-1.55.13.tgz#b21d5a29a7cc50e1f64256a2a35190c221b73277"
   dependencies:
@@ -7525,9 +7525,21 @@ react-error-overlay@^6.0.3:
   version "6.0.3"
   resolved "https://registry.yarnpkg.com/react-error-overlay/-/react-error-overlay-6.0.3.tgz#c378c4b0a21e88b2e159a3e62b2f531fd63bf60d"
 
+react-force-graph-3d@^1.11.3:
+  version "1.11.3"
+  resolved "https://registry.yarnpkg.com/react-force-graph-3d/-/react-force-graph-3d-1.11.3.tgz#3f642e6d6f31e8de66f21b43ab9126620f0e858a"
+  dependencies:
+    "3d-force-graph" "^1.55.12"
+    prop-types "^15.7.2"
+    react-kapsule "^1.4.3"
+
 react-is@^16.8.1, react-is@^16.8.4:
   version "16.10.2"
   resolved "https://registry.yarnpkg.com/react-is/-/react-is-16.10.2.tgz#984120fd4d16800e9a738208ab1fba422d23b5ab"
+
+react-kapsule@^1.4.3:
+  version "1.4.3"
+  resolved "https://registry.yarnpkg.com/react-kapsule/-/react-kapsule-1.4.3.tgz#c3a293b53f1311432948210257874df0b7a0df8b"
 
 react-scripts@3.2.0:
   version "3.2.0"

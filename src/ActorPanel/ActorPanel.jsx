@@ -1,9 +1,11 @@
-import React, { useEffect } from 'react';
+import React, { useCallback, useEffect } from 'react';
 import ActorPanelList from './ActorPanelList';
 import SearchBar from '../SearchBar';
 import useFilter from '../hooks/useFilter';
+import { createGraphData } from '../utils';
+import Predictions from '../Predictions';
 
-const ActorPanel = () => {
+const ActorPanel = ({ data, setData }) => {
   const [
     actors,
     setActors,
@@ -20,6 +22,16 @@ const ActorPanel = () => {
     setActorsView(allActors.map((_, idx) => idx));
   }, []);
 
+  const addActor = (actorName) => {
+    const { nodes, links } = data;
+    const { nodes: newNodes, links: newLinks } = createGraphData(
+      [`${actorName}.jpg`],
+      nodes,
+      links,
+    );
+    setData({ nodes: newNodes, links: newLinks });
+  };
+
   return (
     <div className="panel">
       <div id="header">
@@ -28,8 +40,10 @@ const ActorPanel = () => {
       </div>
       <div id="panelScrim" />
       <div id="contentWrapper">
+        <button onClick={() => addActor('cat')}>Add</button>
         <SearchBar onChange={filterActors} />
         <ActorPanelList actors={actors} actorsView={actorsView} />
+        <Predictions />
       </div>
     </div>
   );
