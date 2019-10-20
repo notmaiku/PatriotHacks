@@ -34,7 +34,7 @@ const ActorPanel = ({
   return (
     <div className="panel">
       <div id="header">
-        <h1>Best Actor Visualizer (BAV)</h1>
+        <h1>Movie Logistics Predictor (MLP)</h1>
         <div id="expandButton" />
       </div>
       <div id="panelScrim" />
@@ -47,7 +47,9 @@ const ActorPanel = ({
           nodes={data.nodes}
           removeActor={removeActor}
         />
-        <Predictions />
+        <Predictions
+          selectedActors={actorsView.map((idx) => defaultActors[idx])}
+        />
       </div>
     </div>
   );
