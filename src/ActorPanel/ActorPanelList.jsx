@@ -1,10 +1,42 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 
-<<<<<<< HEAD
-const actors = ['Adam Sandler', 'Brad Pitt', 'Tom Cruise', 'Tom Hanks'];
-const ActorPanelList = () => actors.map((actor) => <li key={Math.random()}><p>{actor}</p></li>);
-=======
-const ActorPanelList = ({ actors, actorsView }) => actorsView.map((idx) => <div key={Math.random()}>{actors[idx]}</div>);
->>>>>>> 86f78d61ba4023d06f0c5a92c4d5ce87d1e8c5cf
+const ActorPanelList = ({
+  actors,
+  actorsView,
+  addActor,
+  nodes,
+  removeActor,
+}) => {
+  const [actorNodes, setActorNodes] = useState({});
+
+  useEffect(() => {
+    const newActorNodes = {};
+    actors.forEach(({ name, image }) => {
+      newActorNodes[name] = nodes.find(({ img }) => img === image);
+    });
+    setActorNodes(newActorNodes);
+  }, [actorsView, nodes]);
+
+  return actors.map(({ name, image }, idx) => {
+    const isShown = actorsView.includes(idx);
+    return (
+      <li key={Math.random()}>
+        <p>{name}</p>
+        <button
+          type="button"
+          onClick={() => {
+            if (isShown) {
+              removeActor(image, idx, actorNodes[name]);
+            } else {
+              addActor({ name, image }, idx, actorNodes[name]);
+            }
+          }}
+        >
+          {isShown ? 'Remove' : 'Add'}
+        </button>
+      </li>
+    );
+  });
+};
 
 export default ActorPanelList;

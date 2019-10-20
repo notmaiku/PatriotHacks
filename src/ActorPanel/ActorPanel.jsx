@@ -1,35 +1,35 @@
-import React, { useCallback, useEffect } from 'react';
+import React from 'react';
 import ActorPanelList from './ActorPanelList';
 import SearchBar from '../SearchBar';
 import useFilter from '../hooks/useFilter';
-import { createGraphData } from '../utils';
+import { createGraphData, removeNode } from '../utils';
 import Predictions from '../Predictions';
 
-const ActorPanel = ({ data, setData }) => {
-  const [
-    actors,
-    setActors,
-    actorsView,
-    setActorsView,
-    filterActors,
-  ] = useFilter([], []);
+const ActorPanel = ({
+ defaultActors, defaultActorsView, data, setData 
+}) => {
+  const [, , actorsView, setActorsView, filterActors] = useFilter(
+    defaultActors,
+    defaultActorsView,
+  );
 
-  useEffect(() => {
-    // Mock fetch call for all actors
-    console.log('fetching...');
-    const allActors = ['Adam Sandler', 'Brad Pitt', 'Tom Cruise', 'Tom Hanks'];
-    setActors(allActors);
-    setActorsView(allActors.map((_, idx) => idx));
-  }, []);
-
-  const addActor = (actorName) => {
+  const addActor = (actor, idx) => {
     const { nodes, links } = data;
     const { nodes: newNodes, links: newLinks } = createGraphData(
-      [`${actorName}.jpg`],
+      [actor],
       nodes,
       links,
     );
     setData({ nodes: newNodes, links: newLinks });
+    console.log(newNodes, newLinks);
+    setActorsView([...actorsView, idx]);
+  };
+
+  const removeActor = (actorImageFile, idx, node) => {
+    const { nodes, links } = data;
+    const { nodes: newNodes, links: newLinks } = removeNode(node, links, nodes);
+    setData({ nodes: newNodes, links: newLinks });
+    setActorsView(actorsView.filter((actorIdx) => actorIdx !== idx));
   };
 
   return (
@@ -40,9 +40,14 @@ const ActorPanel = ({ data, setData }) => {
       </div>
       <div id="panelScrim" />
       <div id="contentWrapper">
-        <button onClick={() => addActor('cat')}>Add</button>
         <SearchBar onChange={filterActors} />
-        <ActorPanelList actors={actors} actorsView={actorsView} />
+        <ActorPanelList
+          actors={defaultActors}
+          actorsView={actorsView}
+          addActor={addActor}
+          nodes={data.nodes}
+          removeActor={removeActor}
+        />
         <Predictions />
       </div>
     </div>

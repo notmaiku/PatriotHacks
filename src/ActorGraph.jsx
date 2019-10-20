@@ -5,22 +5,10 @@ import ForceGraph3D from 'react-force-graph-3d';
 const ActorGraph = ({ data, setData }) => {
   const fgRef = useRef();
 
-  const handleClick = (node) => {
-    const { nodes, links } = data;
-    // Remove node on click
-    const newLinks = links.filter((l) => l.source !== node && l.target !== node); // Remove links attached to node
-    const newNodes = nodes.slice();
-    newNodes.splice(node.id, 1); // Remove node
-    newNodes.forEach((n, idx) => {
-      n.id = idx;
-    }); // Reset node ids to array index
-    setData({ nodes: newNodes, links: newLinks });
-  };
-
   return (
     <ForceGraph3D
       ref={fgRef}
-      enableNodeDrag={false}
+      enableNodeDrag
       nodeThreeObject={({ img }) => {
         const imgTexture = new THREE.TextureLoader().load(`datasets/${img}`);
         const material = new THREE.SpriteMaterial({ map: imgTexture });
@@ -31,7 +19,6 @@ const ActorGraph = ({ data, setData }) => {
       onNodeHover={(node) => {
         // elem.style.cursor = node ? 'pointer' : null;
       }}
-      onNodeClick={handleClick}
       graphData={data}
     />
   );
