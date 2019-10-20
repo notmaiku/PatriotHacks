@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { convertToCurrency } from './utils';
 
 const Predicitions = ({ selectedActors }) => {
   const [budget, setBudget] = useState(0);
@@ -13,15 +14,19 @@ const Predicitions = ({ selectedActors }) => {
       newRevenue += revenue;
     });
 
-    setBudget(newBudget / selectedActors.length);
-    setRevenue(newRevenue / selectedActors.length);
+    setBudget(
+      (newBudget / selectedActors.length) * (Math.random() * (1 - 0.4) + 0.4),
+    );
+    setRevenue(
+      (newRevenue / selectedActors.length) * (Math.random() * (1 - 0.4) + 0.4),
+    );
   }, [selectedActors]);
 
   return (
     <div>
       <h3>Movie Predictions</h3>
-      <p>{`Budget: ${budget}`}</p>
-      <p>{`Revenue: ${revenue}`}</p>
+      <p>{`Budget: ${convertToCurrency(budget)}`}</p>
+      <p>{`Revenue: ${convertToCurrency(revenue)}`}</p>
     </div>
   );
 };
