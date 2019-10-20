@@ -1,0 +1,11 @@
+body {
+  margin: 0;
+}
+
+.panel {
+  background-color: white;
+  height: 100%;
+  position: absolute;
+  width: 20%;
+  z-index: 1;
+}
