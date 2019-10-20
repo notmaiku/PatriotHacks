@@ -7,6 +7,14 @@ body {
   margin: 0;
 }
 
+div.rv-xy-plot {
+  position: absolute;
+  right: 1 ;
+}
+
+.panel {
+  position: relative;
+}
 /* left panel */
 .panel {
   display: flex;

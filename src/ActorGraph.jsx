@@ -1,5 +1,6 @@
 import React, { useRef, useCallback } from 'react';
 import * as THREE from 'three';
+import ActorPanel, {addActor} from './ActorPanel';
 import ForceGraph3D from 'react-force-graph-3d';
 
 const ActorGraph = ({ data, setData }) => {
@@ -15,6 +16,18 @@ const ActorGraph = ({ data, setData }) => {
       n.id = idx;
     }); // Reset node ids to array index
     setData({ nodes: newNodes, links: newLinks });
+  };
+
+  const drop = Event => {
+    Event.preventDefault();
+    const actorID = Event.dataTransfer.getData('actorID');
+    const actor = document.getElementByID(actorID);
+    actor.style.display = 'block';
+    ActorPanel.addActor('cat');
+  };
+
+  const dragOver = Event => {
+    Event.preventDefault();
   };
 
   return (
@@ -33,6 +46,8 @@ const ActorGraph = ({ data, setData }) => {
       }}
       onNodeClick={handleClick}
       graphData={data}
+      onDragOver={dragOver}
+      onDrop={drop}
     />
   );
 };

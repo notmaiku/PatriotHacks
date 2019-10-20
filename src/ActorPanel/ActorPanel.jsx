@@ -32,6 +32,16 @@ const ActorPanel = ({ data, setData }) => {
     setData({ nodes: newNodes, links: newLinks });
   };
 
+  const dragStart = Event => {
+        const target= Event.target;
+        setTimeout(() => {
+            target.style.display = "none";
+        }, 0);
+    }
+
+    const dragOver = Event => {
+        Event.stopPropagation();
+    }
   return (
     <div className="panel">
       <div id="header">
@@ -42,8 +52,8 @@ const ActorPanel = ({ data, setData }) => {
       <div id="contentWrapper">
         <button onClick={() => addActor('cat')}>Add</button>
         <SearchBar onChange={filterActors} />
-        <ActorPanelList actors={actors} actorsView={actorsView} />
-        <Predictions />
+        <ActorPanelList actors={actors} actorsView={actorsView} onDrag={dragStart} onDragOver={dragOver}/>
+        <Predictions/>
       </div>
     </div>
   );
