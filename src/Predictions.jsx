@@ -14,8 +14,12 @@ const Predicitions = ({ selectedActors }) => {
       newRevenue += revenue;
     });
 
-    setBudget(newBudget / selectedActors.length);
-    setRevenue(newRevenue / selectedActors.length);
+    setBudget(
+      (newBudget / selectedActors.length) * (Math.random() * (1 - 0.4) + 0.4),
+    );
+    setRevenue(
+      (newRevenue / selectedActors.length) * (Math.random() * (1 - 0.4) + 0.4),
+    );
   }, [selectedActors]);
 
   return (
